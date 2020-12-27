@@ -17,15 +17,15 @@ const Timer = (props) => {
               <input type="text" placeholder="00" />:
               <input type="text" placeholder="00" />
             </form>
-            <div className="timerTwo">
-              <div className="label">Black</div>
-              <div className="editTimer"></div>
-              <form action="">
-                <input type="text" placeholder="00" />:
-                <input type="text" placeholder="00" />:
-                <input type="text" placeholder="00" />
-              </form>
-            </div>
+          </div>
+          <div className="timerTwo">
+            <div className="label">Black</div>
+            <div className="editTimer"></div>
+            <form action="">
+              <input type="text" placeholder="00" />:
+              <input type="text" placeholder="00" />:
+              <input type="text" placeholder="00" />
+            </form>
           </div>
         </div>
         <div className="controls">

@@ -4,7 +4,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  color: white;
+  //   color: white;
 }
 
 #app,
@@ -36,6 +36,7 @@ header {
     font-weight: normal;
     font-size: 20px;
     line-height: 24px;
+    color: white;
   }
 }
 
@@ -65,5 +66,20 @@ section {
     font-weight: 900;
     font-size: 20px;
     line-height: 24px;
+  }
+}
+
+.controls {
+  .switches {
+    .white {
+      background: rgba(179, 165, 165, 0.486);
+      padding: 2rem;
+      display: inline-block;
+    }
+    .black {
+      background: rgba(179, 165, 165, 0.486);
+      padding: 2rem;
+      display: inline-block;
+    }
   }
 }
