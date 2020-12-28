@@ -1,10 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
 
+$red: #cf0a0a;
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  //   color: white;
 }
 
 #app,
@@ -18,7 +18,7 @@ header {
   user-select: none;
   .logo {
     text-transform: capitalize;
-    background: #cf0a0a;
+    background: $red;
     display: inline-block;
     padding: 1rem 2rem;
     border-radius: 300px;
@@ -45,41 +45,194 @@ section {
   grid-template-columns: 2fr 1fr;
   height: 100%;
   margin-top: 1rem;
+  background: url(./assets/chesspieces.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
   .timer {
-    background: rgb(206, 60, 60);
+    // background: $red;
     height: 100%;
   }
 
   .controls {
-    background: green;
+    background: transparent;
     height: 100%;
   }
 }
 
 .timer {
+  user-select: none;
+  margin-left: 2rem;
   .timerOne {
+    form {
+      // background: white;
+      padding: 2rem;
+      width: fit-content;
+      border-radius: 300px;
+      border: 2px solid $red;
+      font-family: Inter;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 80px;
+      line-height: 97px;
+      color: white;
+      input {
+        background: transparent;
+        color: white;
+        font-family: Inter;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 80px;
+        // line-height: 97px;
+        color: white;
+        width: 100px;
+        border: none;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        cursor: pointer;
+      }
+      ::placeholder {
+        color: white;
+      }
+      input:nth-child(1) {
+        // background: green;
+      }
+      input:nth-child(2) {
+        // background: green;
+      }
+      input:nth-child(3) {
+        // background: green;
+      }
+    }
+  }
+  .timerTwo {
+    form {
+      // background: white;
+      padding: 2rem;
+      width: fit-content;
+      border-radius: 300px;
+      border: 2px solid $red;
+      font-family: Inter;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 80px;
+      line-height: 97px;
+      color: white;
+      input {
+        background: transparent;
+        color: white;
+        font-family: Inter;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 80px;
+        // line-height: 97px;
+        color: white;
+        width: 100px;
+        border: none;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        cursor: pointer;
+      }
+      ::placeholder {
+        color: white;
+      }
+      input:nth-child(1) {
+        // background: green;
+      }
+      input:nth-child(2) {
+        // background: green;
+      }
+      input:nth-child(3) {
+        // background: green;
+      }
+    }
   }
   .label {
+    margin: 2rem 0;
     padding: 1rem 2rem;
     font-family: Inter;
     font-style: normal;
     font-weight: 900;
     font-size: 20px;
     line-height: 24px;
+    color: white;
+    background: $red;
+    display: inline-block;
+    text-transform: capitalize;
   }
 }
 
 .controls {
+  margin-left: 2rem;
   .switches {
-    .white {
-      background: rgba(179, 165, 165, 0.486);
-      padding: 2rem;
+    padding: 2rem 1rem;
+    padding-right: 5rem;
+    border: 2px solid $red;
+    width: max-content;
+    border-radius: 30px;
+    background: #040d1c;
+    user-select: none;
+    .white,
+    .black {
+      text-align: center;
+      color: $red;
+      padding-top: calc(100px / 4.5);
       display: inline-block;
+      font-family: Inter;
+      font-style: normal;
+      font-weight: 900;
+      font-size: 36px;
+      line-height: 61px;
+      background: white;
+      height: 100px;
+      width: 100px;
+      border-radius: 300px;
+      cursor: pointer;
+      &:active {
+        transform: scale(0.9);
+      }
+    }
+    .white {
     }
     .black {
-      background: rgba(179, 165, 165, 0.486);
-      padding: 2rem;
-      display: inline-block;
+      margin-left: 1rem;
+    }
+  }
+
+  .start {
+    color: white;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 25px;
+    line-height: 30px;
+    background: $red;
+    display: inline-block;
+    padding: 1rem 2rem;
+    margin-top: 2rem;
+    border-radius: 300px;
+    cursor: pointer;
+    user-select: none;
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+  .reset {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 24px;
+    color: rgba(255, 255, 255, 0.4);
+    background: rgba(209, 10, 10, 0.404);
+    display: inline-block;
+    padding: 1rem 2rem;
+    margin-top: 2rem;
+    border-radius: 300px;
+    cursor: pointer;
+    user-select: none;
+    &:active {
+      transform: scale(0.9);
     }
   }
 }
