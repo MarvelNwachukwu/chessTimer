@@ -3,22 +3,47 @@ import './timer.scss';
 
 const Timer = (props) => {
 
+  const changePlayer = (e) => { 
 
-  let [whiteData, setWhiteData] = useState({ 
-    hours: '',
-    minutes: '',
-    seconds: '',
-    totalSeconds: 0
-  });
-  let [blackData, setBlackData] = useState({ 
-    hours: '',
-    minutes: '',
-    seconds: '',
-    totalSeconds: 0
-  });
+    const countForWhite = (state) => { 
+      if(state) { 
+        setInterval(() => { 
+          if(Math.trunc(totalSeconds.white) === totalSeconds.white) { 
+            console.log('no hours')
+          }
+        },1000)
+      }
+    };
+
+
+    const countForBlack = (state) => { 
+
+    }
+    if(e.key === 'w' && gameStarted) { 
+      setWhoIsPlaying('black');
+      countForWhite(true);
+    }
+    else if(e.key === 'b' && gameStarted) { 
+      setWhoIsPlaying('white');
+      countForWhite(false);
+    }
+    else if(e.target.innerText === 'W' && gameStarted) { 
+      setWhoIsPlaying('black');
+      console.log(totalSeconds.white)
+    }
+    else if(e.target.innerText === 'B' && gameStarted) { 
+      setWhoIsPlaying('white');
+    }
+
+  }
 
   const startCountDown = () => { 
-    whoIsPlaying === '' ? setWhoIsPlaying('white') : setWhoIsPlaying('black') ? setWhoIsPlaying('white') : setWhoIsPlaying('black');
+
+    if(!gameStarted) { 
+      setGameStarted(true);
+      setWhoIsPlaying('white');
+    };
+
     let count = { 
       white: { 
         hr: (parseInt(whiteData.hours) > 0) ? parseInt(whiteData.hours * 3600) : 0,
@@ -38,8 +63,8 @@ const Timer = (props) => {
     let whiteTotalSeconds = countWhite.hr + countWhite.mn + countWhite.sc;
     let blackTotalSeconds = countBlack.hr + countBlack.mn + countBlack.sc;
 
+    setTotalSeconds({...totalSeconds, white: whiteTotalSeconds, black: blackTotalSeconds});
     
-
   }
 
   const timerChangerHandler = (e) => {
@@ -105,6 +130,18 @@ const Timer = (props) => {
     }
   }
 
+  let [whiteData, setWhiteData] = useState({ 
+    hours: '',
+    minutes: '',
+    seconds: '',
+    totalSeconds: 0
+  });
+  let [blackData, setBlackData] = useState({ 
+    hours: '',
+    minutes: '',
+    seconds: '',
+    totalSeconds: 0
+  });
   let [currentlyPlaying, setCurrentlyPlaying] = useState(false);
   let [gameStarted, setGameStarted] = useState(false);
   let [gameSet, setGameSet] = useState(false);
@@ -112,10 +149,14 @@ const Timer = (props) => {
     white: false,
     black: false
   });
-  let [whoIsPlaying, setWhoIsPlaying] = useState('white');
+  let [whoIsPlaying, setWhoIsPlaying] = useState('');
+  let [totalSeconds, setTotalSeconds] = useState({ 
+    white: 0,
+    black: 0
+  })
 
   return (
-    <div id='app'>
+    <div id='app' onKeyDown={changePlayer} tabIndex={0}>
       <header>
         <div className='logo'>chessly</div>
         <p>Countdown timer for chess</p>
@@ -187,8 +228,19 @@ const Timer = (props) => {
 
         <div className='controls'>
           <div className='switches'>
-            <div className='white' style={{opacity: `${whoIsPlaying === 'white' ? '1' : '0.3'}`}}>W</div>
-            <div className='black' style={{opacity: `${whoIsPlaying === 'black' ? '1' : '0.3'}`}}>B</div>
+            <div 
+              onClick={changePlayer} 
+              className='white' 
+              style={{opacity: `${whoIsPlaying === 'white' ? '1' : '0.3'}`}}
+            >
+                W
+            </div>
+            <div 
+              onClick={changePlayer}  className='black' 
+              style={{opacity: `${whoIsPlaying === 'black' ? '1' : '0.3'}`}}
+            >
+              B
+            </div>
           </div>
           <div 
             className={(dataWatch.white && dataWatch.black) ? 'start' : 'startDull'}
