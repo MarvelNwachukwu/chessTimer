@@ -21,12 +21,20 @@ $red: #cf0a0a;
   margin-left: 1rem;
   margin-right: 1rem;
   cursor: pointer;
+  overflow: hidden;
+
   &:focus {
     outline: transparent;
   }
   &::placeholder {
     color: white;
   }
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 #app,
@@ -320,7 +328,9 @@ section {
 
   .blackSide {
     // transform: rotate(180deg);
+    margin: 0 10vw;
     .mobileBlackSwitch {
+      margin: 0 auto;
       color: $red;
       font-family: Inter;
       font-style: normal;
@@ -333,6 +343,16 @@ section {
       text-align: center;
       padding-top: calc(100px / 3);
       border-radius: 300px;
+    }
+    form {
+      color: white;
+      font-size: 40px;
+      input {
+        // background: chartreuse;
+        font-size: 40px;
+        width: 50px;
+        margin: 0;
+      }
     }
   }
 

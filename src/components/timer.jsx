@@ -2,25 +2,38 @@ import { useState } from 'react';
 import './timer.scss';
 
 const Timer = (props) => {
-  let [whiteData, setWhiteData] = useState({
-    hours: '',
-    minutes: '',
-    seconds: '',
-    totalSeconds: 0,
-  });
-  let [blackData, setBlackData] = useState({
-    hours: '',
-    minutes: '',
-    seconds: '',
-    totalSeconds: 0,
-  });
+  const changePlayer = (e) => {
+    const countForWhite = (state) => {
+      if (state) {
+        setInterval(() => {
+          if (Math.trunc(totalSeconds.white) === totalSeconds.white) {
+            console.log('no hours');
+          }
+        }, 1000);
+      }
+    };
+
+    const countForBlack = (state) => {};
+    if (e.key === 'w' && gameStarted) {
+      setWhoIsPlaying('black');
+      countForWhite(true);
+    } else if (e.key === 'b' && gameStarted) {
+      setWhoIsPlaying('white');
+      countForWhite(false);
+    } else if (e.target.innerText === 'W' && gameStarted) {
+      setWhoIsPlaying('black');
+      console.log(totalSeconds.white);
+    } else if (e.target.innerText === 'B' && gameStarted) {
+      setWhoIsPlaying('white');
+    }
+  };
 
   const startCountDown = () => {
-    whoIsPlaying === ''
-      ? setWhoIsPlaying('white')
-      : setWhoIsPlaying('black')
-      ? setWhoIsPlaying('white')
-      : setWhoIsPlaying('black');
+    if (!gameStarted) {
+      setGameStarted(true);
+      setWhoIsPlaying('white');
+    }
+
     let count = {
       white: {
         hr:
@@ -47,6 +60,12 @@ const Timer = (props) => {
 
     let whiteTotalSeconds = countWhite.hr + countWhite.mn + countWhite.sc;
     let blackTotalSeconds = countBlack.hr + countBlack.mn + countBlack.sc;
+
+    setTotalSeconds({
+      ...totalSeconds,
+      white: whiteTotalSeconds,
+      black: blackTotalSeconds,
+    });
   };
 
   const timerChangerHandler = (e) => {
@@ -113,9 +132,26 @@ const Timer = (props) => {
   };
 
   const resetTimer = () => {
-    console.log('I was clicked ' + Math.random());
+    setWhiteData({ hours: `00` });
+    setWhiteData({ minutes: `00` });
+    setWhiteData({ seconds: `00` });
+    setBlackData({ hours: `00` });
+    setBlackData({ minutes: `00` });
+    setBlackData({ seconds: `00` });
   };
 
+  let [whiteData, setWhiteData] = useState({
+    hours: '',
+    minutes: '',
+    seconds: '',
+    totalSeconds: 0,
+  });
+  let [blackData, setBlackData] = useState({
+    hours: '',
+    minutes: '',
+    seconds: '',
+    totalSeconds: 0,
+  });
   let [currentlyPlaying, setCurrentlyPlaying] = useState(false);
   let [gameStarted, setGameStarted] = useState(false);
   let [gameSet, setGameSet] = useState(false);
@@ -123,10 +159,14 @@ const Timer = (props) => {
     white: false,
     black: false,
   });
-  let [whoIsPlaying, setWhoIsPlaying] = useState('white');
+  let [whoIsPlaying, setWhoIsPlaying] = useState('');
+  let [totalSeconds, setTotalSeconds] = useState({
+    white: 0,
+    black: 0,
+  });
 
   return (
-    <div id='app'>
+    <div id='app' onKeyDown={changePlayer} tabIndex={0}>
       <div className='desktop'>
         <header>
           <div className='logo'>chessly</div>
@@ -140,8 +180,10 @@ const Timer = (props) => {
               <form>
                 <input
                   onChange={timerChangerHandler}
-                  type='tel'
+                  type='number'
                   placeholder='00'
+                  min='0'
+                  max='99'
                   data-color='white'
                   data-type='hr'
                   value={whiteData.hours}
@@ -149,8 +191,10 @@ const Timer = (props) => {
                 :
                 <input
                   onChange={timerChangerHandler}
-                  type='tel'
+                  type='number'
                   placeholder='00'
+                  min='0'
+                  max='99'
                   data-color='white'
                   data-type='mn'
                   value={whiteData.minutes}
@@ -158,8 +202,10 @@ const Timer = (props) => {
                 :
                 <input
                   onChange={timerChangerHandler}
-                  type='tel'
+                  type='number'
                   placeholder='00'
+                  min='0'
+                  max='99'
                   data-color='white'
                   data-type='sc'
                   value={whiteData.seconds}
@@ -173,8 +219,10 @@ const Timer = (props) => {
               <form>
                 <input
                   onChange={timerChangerHandler}
-                  type='tel'
+                  type='number'
                   placeholder='00'
+                  min='0'
+                  max='99'
                   data-color='black'
                   data-type='hr'
                   value={blackData.hours}
@@ -182,8 +230,10 @@ const Timer = (props) => {
                 :
                 <input
                   onChange={timerChangerHandler}
-                  type='tel'
+                  type='number'
                   placeholder='00'
+                  min='0'
+                  max='99'
                   data-color='black'
                   data-type='mn'
                   value={blackData.minutes}
@@ -191,8 +241,10 @@ const Timer = (props) => {
                 :
                 <input
                   onChange={timerChangerHandler}
-                  type='tel'
+                  type='number'
                   placeholder='00'
+                  min='0'
+                  max='99'
                   data-color='black'
                   data-type='sc'
                   value={blackData.seconds}
@@ -204,12 +256,14 @@ const Timer = (props) => {
           <div className='controls'>
             <div className='switches'>
               <div
+                onClick={changePlayer}
                 className='white'
                 style={{ opacity: `${whoIsPlaying === 'white' ? '1' : '0.3'}` }}
               >
                 W
               </div>
               <div
+                onClick={changePlayer}
                 className='black'
                 style={{ opacity: `${whoIsPlaying === 'black' ? '1' : '0.3'}` }}
               >
@@ -269,6 +323,13 @@ const Timer = (props) => {
       <div className='mobile'>
         <div className='blackSide'>
           <div className='mobileBlackSwitch'>B</div>
+          <div className='timerDetails'>
+            <form action=''>
+              <input type='tel' name='' id='' placeholder='00' />:
+              <input type='tel' name='' id='' placeholder='00' />:
+              <input type='tel' name='' id='' placeholder='00' />
+            </form>
+          </div>
         </div>
         <div className='controls'></div>
         <div className='whiteSide'>
