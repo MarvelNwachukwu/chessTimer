@@ -132,12 +132,8 @@ const Timer = (props) => {
   };
 
   const resetTimer = () => {
-    setWhiteData({ hours: `00` });
-    setWhiteData({ minutes: `00` });
-    setWhiteData({ seconds: `00` });
-    setBlackData({ hours: `00` });
-    setBlackData({ minutes: `00` });
-    setBlackData({ seconds: `00` });
+    setWhiteData({ hours: ``, minutes: ``, seconds: `` });
+    setBlackData({ hours: ``, minutes: ``, seconds: `` });
   };
 
   let [whiteData, setWhiteData] = useState({

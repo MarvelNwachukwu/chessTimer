@@ -130,7 +130,6 @@ section {
         font-style: normal;
         font-weight: normal;
         font-size: 80px;
-        // line-height: 97px;
         color: white;
         width: 100px;
         border: none;
@@ -184,6 +183,7 @@ section {
       width: 100px;
       border-radius: 300px;
       cursor: pointer;
+      transition: all 0.75s;
       &:active {
         transform: scale(0.9);
       }
