@@ -21,12 +21,20 @@ $red: #cf0a0a;
   margin-left: 1rem;
   margin-right: 1rem;
   cursor: pointer;
-    &:focus { 
-      outline: transparent;
-    }
-    &::placeholder {
-      color: white;
-    }
+  overflow: hidden;
+
+  &:focus {
+    outline: transparent;
+  }
+  &::placeholder {
+    color: white;
+  }
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 #app,
@@ -88,19 +96,19 @@ section {
   margin-left: 2rem;
   .timerOne {
     margin-bottom: 5em;
-      form {
-        background: #040d1c;
-        padding: 2rem;
-        width: fit-content;
-        border-radius: 300px;
-        border: 2px solid $red;
-        font-family: Inter;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 80px;
-        line-height: 97px;
-        color: white;
-      }
+    form {
+      background: #040d1c;
+      padding: 2rem;
+      width: fit-content;
+      border-radius: 300px;
+      border: 2px solid $red;
+      font-family: Inter;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 80px;
+      line-height: 97px;
+      color: white;
+    }
   }
   .timerTwo {
     form {
@@ -122,16 +130,15 @@ section {
         font-style: normal;
         font-weight: normal;
         font-size: 80px;
-        // line-height: 97px;
         color: white;
         width: 100px;
         border: none;
         margin-left: 1rem;
         margin-right: 1rem;
         cursor: pointer;
-          ::placeholder {
-            color: white;
-          }
+        ::placeholder {
+          color: white;
+        }
       }
     }
   }
@@ -176,6 +183,7 @@ section {
       width: 100px;
       border-radius: 300px;
       cursor: pointer;
+      transition: all 0.75s;
       &:active {
         transform: scale(0.9);
       }
@@ -203,7 +211,7 @@ section {
     cursor: pointer;
     user-select: none;
     z-index: 5;
-    &::before { 
+    &::before {
       display: block;
       width: 110%;
       height: 115%;
@@ -217,7 +225,7 @@ section {
       opacity: 0;
       transition: all 1s;
     }
-    &:active::before { 
+    &:active::before {
       animation: buttonAnimation 1 0.3s ease;
     }
   }
@@ -255,9 +263,9 @@ section {
     margin-top: 2rem;
     border-radius: 300px;
     cursor: pointer;
-    user-select: none;  
+    user-select: none;
     z-index: 5;
-    &::before { 
+    &::before {
       display: block;
       width: 110%;
       height: 115%;
@@ -271,7 +279,7 @@ section {
       opacity: 0;
       transition: all 1s;
     }
-    &:active::before { 
+    &:active::before {
       animation: buttonAnimation 1 0.3s ease;
     }
   }
@@ -292,19 +300,82 @@ section {
     margin-top: 2rem;
     border-radius: 300px;
     cursor: pointer;
-    user-select: none;  
+    user-select: none;
     z-index: 5;
   }
 }
 
-
-@keyframes buttonAnimation { 
-  from { 
+@keyframes buttonAnimation {
+  from {
     opacity: 1;
     transform: scale(1);
   }
   to {
     opacity: 0;
     transform: scale(2);
-   }
+  }
+}
+.mobile {
+  display: none;
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) {
+  .desktop {
+    display: none;
+  }
+  .mobile {
+    display: block;
+  }
+
+  .blackSide {
+    // transform: rotate(180deg);
+    margin: 0 10vw;
+    .mobileBlackSwitch {
+      margin: 0 auto;
+      color: $red;
+      font-family: Inter;
+      font-style: normal;
+      font-weight: 900;
+      font-size: 30px;
+      background: white;
+      display: inline-block;
+      height: 100px;
+      width: 100px;
+      text-align: center;
+      padding-top: calc(100px / 3);
+      border-radius: 300px;
+    }
+    form {
+      color: white;
+      font-size: 40px;
+      input {
+        // background: chartreuse;
+        font-size: 40px;
+        width: 50px;
+        margin: 0;
+      }
+    }
+  }
+
+  .whiteSide {
+    position: absolute;
+    bottom: 1rem;
+
+    .mobileWhiteSwitch {
+      color: $red;
+      font-family: Inter;
+      font-style: normal;
+      font-weight: 900;
+      font-size: 30px;
+      background: white;
+      display: inline-block;
+      height: 100px;
+      width: 100px;
+      text-align: center;
+      padding-top: calc(100px / 3);
+      border-radius: 300px;
+    }
+  }
+
+  .controls {
+  }
 }
