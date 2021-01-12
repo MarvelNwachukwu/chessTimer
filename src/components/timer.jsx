@@ -129,15 +129,48 @@ const Timer = (props) => {
         }
       }
     }
+
+    addPrefixToInput(target);
   };
 
   const resetTimer = () => {
-    setWhiteData({ hours: `00` });
-    setWhiteData({ minutes: `00` });
-    setWhiteData({ seconds: `00` });
-    setBlackData({ hours: `00` });
-    setBlackData({ minutes: `00` });
-    setBlackData({ seconds: `00` });
+    setWhiteData({ hours: ``, minutes: ``, seconds: `` });
+    setBlackData({ hours: ``, minutes: ``, seconds: `` });
+  };
+
+  const addPrefixToInput = (e) => {
+    let originalInput = e.value;
+    let dataSetColor = e.dataset.color;
+    let dataSetType = e.dataset.type;
+    // console.table([e.value.length, originalInput]);
+
+    if (e.value.length <= 2) {
+      dataSetColor == 'black'
+        ? dataSetType == 'hr'
+          ? setBlackData({ ...blackData, hours: `0${originalInput}` })
+          : dataSetType == 'mn'
+          ? setBlackData({ ...blackData, minutes: `0${originalInput}` })
+          : setBlackData({ ...blackData, seconds: `0${originalInput}` })
+        : dataSetType == 'hr'
+        ? setWhiteData({ ...whiteData, hours: `0${originalInput}` })
+        : dataSetType == 'mn'
+        ? setWhiteData({ ...whiteData, minutes: `0${originalInput}` })
+        : setWhiteData({ ...whiteData, seconds: `0${originalInput}` });
+    } else if (e.value.length === 3) {
+      let modifiedinput = originalInput.split('').slice(1).join('');
+
+      dataSetColor == 'black'
+        ? dataSetType == 'hr'
+          ? setBlackData({ ...blackData, hours: `${modifiedinput}` })
+          : dataSetType == 'mn'
+          ? setBlackData({ ...blackData, minutes: `${modifiedinput}` })
+          : setBlackData({ ...blackData, seconds: `${modifiedinput}` })
+        : dataSetType == 'hr'
+        ? setWhiteData({ ...whiteData, hours: `${modifiedinput}` })
+        : dataSetType == 'mn'
+        ? setWhiteData({ ...whiteData, minutes: `${modifiedinput}` })
+        : setWhiteData({ ...whiteData, seconds: `${modifiedinput}` });
+    }
   };
 
   let [whiteData, setWhiteData] = useState({
